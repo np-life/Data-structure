@@ -24,6 +24,6 @@ int calculate_sum(int array[])  // 따라서 int array[] 대신 int *array 라고 매개�
 	int sum, i;
 	sum = 0;
 	for (i = 0; i < 10; i++)
-		sum = sum + array[i];  // instead of array[i],  *(array+i) 와 같은 동작을 합니다.
+		sum = sum + array[i];  // instead of array[i],  *(array+i) 와 같은 동작을 합니다..
 	return sum;
 }
