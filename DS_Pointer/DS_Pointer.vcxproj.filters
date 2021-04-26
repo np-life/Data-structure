@@ -27,7 +27,7 @@
     <ClCompile Include="05배열 키우기.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="example03.cpp">
+    <ClCompile Include="example03-0.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="example03-1.cpp">
@@ -36,7 +36,7 @@
     <ClCompile Include="06문자열.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="example04.cpp">
+    <ClCompile Include="example04-0.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="example04-1.cpp">
