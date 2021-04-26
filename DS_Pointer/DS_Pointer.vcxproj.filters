@@ -15,13 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="exampe02.cpp">
+    <ClCompile Include="example02.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="03포인터 arithmetic.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="04동적메모리 할당.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="05배열 키우기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="example03.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="example03-1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
