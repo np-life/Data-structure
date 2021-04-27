@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03.PhoneNumber-Book v1.0", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04.PhoneNumber-Book patch", "04.PhoneNumber-Book patch\04.PhoneNumber-Book patch.vcxproj", "{FBE1412D-A639-4460-AA63-7AAB00B2945C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05.PhoneNumber-Book v3.0", "05.PhoneNumber-Book v3.0\05.PhoneNumber-Book v3.0.vcxproj", "{00054FD8-46E3-47A3-B463-141CA5D3FD88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{FBE1412D-A639-4460-AA63-7AAB00B2945C}.Release|x64.Build.0 = Release|x64
 		{FBE1412D-A639-4460-AA63-7AAB00B2945C}.Release|x86.ActiveCfg = Release|Win32
 		{FBE1412D-A639-4460-AA63-7AAB00B2945C}.Release|x86.Build.0 = Release|Win32
+		{00054FD8-46E3-47A3-B463-141CA5D3FD88}.Debug|x64.ActiveCfg = Debug|x64
+		{00054FD8-46E3-47A3-B463-141CA5D3FD88}.Debug|x64.Build.0 = Debug|x64
+		{00054FD8-46E3-47A3-B463-141CA5D3FD88}.Debug|x86.ActiveCfg = Debug|Win32
+		{00054FD8-46E3-47A3-B463-141CA5D3FD88}.Debug|x86.Build.0 = Debug|Win32
+		{00054FD8-46E3-47A3-B463-141CA5D3FD88}.Release|x64.ActiveCfg = Release|x64
+		{00054FD8-46E3-47A3-B463-141CA5D3FD88}.Release|x64.Build.0 = Release|x64
+		{00054FD8-46E3-47A3-B463-141CA5D3FD88}.Release|x86.ActiveCfg = Release|Win32
+		{00054FD8-46E3-47A3-B463-141CA5D3FD88}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
