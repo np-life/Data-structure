@@ -9,9 +9,9 @@ char* numbers[CARACITY];
 int n = 0;
 
 void add();
-//void find();
-//void status();
-//void remove();
+void find();
+void status();
+void remove();
 
 int main()
 {
@@ -22,14 +22,14 @@ int main()
 
 		if (strcmp(command, "add") == 0)
 			add();
-		//else if (strcmp(command, "find") == 0)
-		//	find();
-		//else if (strcmp(command, "status") == 0)
-		//	status();
-		//else if (strcmp(command, "delete") == 0)
-		//	remove();
-		//else if (strcmp(command, "exit") == 0)
-		//	break;
+		else if (strcmp(command, "find") == 0)
+			find();
+		else if (strcmp(command, "status") == 0)
+			status();
+		else if (strcmp(command, "delete") == 0)
+			remove();
+		else if (strcmp(command, "exit") == 0)
+			break;
 	}
 	return 0;
 }
@@ -46,3 +46,40 @@ void add() {
 	printf("%s was added successfully.\n", buf1);
 }
 
+void find() {
+	char buf[BUFFER_SIZE];
+	scanf("%s", buf);
+
+	int i;
+	for (i = 0; i < n; i++) {
+		if (strcmp(buf, names[i]) == 0) {
+			printf("%s\n", numbers[i]);
+			return;
+		}
+	}
+	printf("No person named '%s' exists.\n", buf);
+}
+
+void status() {
+	int i;
+	for (i = 0; i < n; i++)
+		printf("%s   %s\n", names[i], numbers[i]);
+	printf("Total %d persons.\n", n);
+}
+
+void remove() { // name 위치를 삭제하고 제일 마지막 name을 삭제한 위치로 복사합니다.
+	char buf[BUFFER_SIZE];
+	scanf("%s", buf);
+
+	int i;
+	for (i = 0; i < n; i++) {
+		if (strcmp(buf, names[i]) == 0) {
+			names[i] = names[n - 1];
+			numbers[i] = numbers[n - 1];
+			n--;
+			printf("'%s' was deleted successfully. \n", buf);
+			return;
+		}
+	}
+	printf("No person named '%s' exists. \n", buf);
+}
