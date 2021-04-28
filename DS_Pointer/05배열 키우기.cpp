@@ -14,6 +14,6 @@
 	
 	array = tmp;
 
-	(example03.cpp 참조)
+	(example03-0.cpp 참조)
 	(example03-1.cpp 참조)
 	ㅇ*/
