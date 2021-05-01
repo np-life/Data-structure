@@ -1,0 +1,248 @@
+어떤 노드 뒤에 새로운 노드를 삽입하는 연산을 공부합시다.
+	(1) 새로운 노드를 만들고 데이터를 저장한다.
+	(2) 새로운 노드의 next 필드가 prev의 다음 노드를 가리키도록 한다.
+	(3) 새로운 노드를 prev의 다음 노드로 만든다.
+
+(2)와(3)의 순서는 특히 중요합니다.
+prev의 next필드가 새로운 노드를 먼저 가리키게 만들어버리면 
+새로운 노드의 next가 가리켜야 할 다음 노드의 주소를 잃어버리게 됩니다.
+이것을 코드로 옮겨보면.
+
+	Node *tmp = (Node *)malloc(sizeof(Node));
+	tmp->data = data_to_store;
+	tmp->next = prev->next;
+	prev->next = tmp;
+
+* insert_after() 정의 - 삽입에 성공하면 1, 아니면 0을 반환하게 합니다.
+
+	int add_after(Node *prev, char * item)
+	{
+		if (prev==NULL)
+			return 0;
+		
+		Node * tmp = (Node *)malloc(sizeof(Node));
+		tmp->data = item;
+		tmp->next = prev->next;
+		prev->next = tmp;
+		
+		return 1;
+	}
+
+	연결리스트에 새로운 노드를 삽입할 때 삽입할 위치의 바로 앞 노드의 
+	주소가 필요하다. 즉 어떤 노드의 뒤에 삽입하는것은 간단하지만,
+	반대로 어떤 노드의 앞에 삽입하는 것은 간단하지 않다.
+
+
+다음은 삭제연산입니다. 
+먼저 첫번째 노드의 삭제와 관련된 연산.
+이것은 간단하죠. 단지 head가 head->next 하면 가능은 합니다.
+원래는 head가 가리키던 Node를 free 해줘야 하는걸 우리는 알고있습니다.
+
+* remove_first() 
+	- 연결리스트의 첫번째 노드를 삭제하고 그 노드의 주소를 반환합니다.
+
+	Node *remove_first() {
+		if (head == NULL)
+			return NULL;
+		else {
+			Node *tmp = head;
+			head = head->next;
+			return tmp;
+		}
+	}
+
+
+
+다음, 어떤 노드의 다음 노드 삭제하기 연산입니다.
+이것도 간단한 아이디어입니다. 어떤 임의의 노드를 삭제하기위해서는
+이전 노드가 삭제할 노드를 가리키지않고 
+삭제할 노드의 next가 가리키는 노드를 가리키면됩니다.
+생각하면서 바로바로 적어서 말이 조금 이상한데, 
+
+	if (prev->next != NULL)
+		prev->next = prev->next->next;
+
+조금만 생각하면 어렵지않습니다.
+
+* Node *remove_after (Node *prev) 
+	- 삭제되는 노드의 주소를 반환.
+
+	Node *remove_after (Node *prev) {
+		Node *tmp = prev->next;
+		if (tmp == NULL)
+			return NULL;
+		else {
+			prev->next = tmp->next;
+			return tmp;
+		}
+	}
+
+단순연결리스트에 어떤 노드를 삭제할 때는 삭제할 노드의 
+바로 앞 노드의 주소가 필요하다.
+삭제할 노드의 주소만으로는 삭제할 수 없다.
+
+
+
+이번엔 어떤 단어를 가진 노드를 찾는 연산을 해봅시다.
+
+연결리스트의 노드들을 처음부터 순서대로 방문하는 것을 순회
+(traverse)한다고 말한다. 이 함수는 입력된 문자열 word와 
+동일한 단어를 저장한 노드를 찾아서 그 노드의 주소를 반환
+한다. 그것을 위해서 연결리스트를 순회한다.
+
+* Node *find(char *word) 
+	- word와 같은 data를 가진 최초의 노드주소를 반환.
+
+	Node *find(char *word){
+		Node *p = head;
+		while (p != NULL){
+			if (strcmp(p->data, word) == 0)
+				return p;
+			p = p->next
+		}
+		return NULL;
+	}
+
+반환값은 word와 같은 data를 포함한 Node의 주소입니다.
+노드를 끝까지 순회해서 같은 단어가 없으면 NULL을 return 합니다.
+
+
+
+자신이 원하는 데이터가 포함된 노드의 주소를 반환받는것이
+이해가 간다면 리스트 n번째 노드의 주소를 반환받는것은
+그렇게 어려운 작업은 아닐겁니다.
+
+* Node *get_node(int index) 
+	- 연결리스트의 index번째 노드의 주소를 반환.
+
+	Node *get_node(int index){
+		if (index < 0)
+			return NULL;
+		Node *p = head;
+		for(int i=0; i<index && p!=NULL; i++)
+			p = p->next;
+		return p;
+	}
+
+중간에 for 조건문 p!==NULL은 계속해서 p가 변화하는데
+p가 NULL이면 p->next가 에러기 때문에 그렇습니다.
+
+
+
+이번에는 이제 add 함수인데 통합된 형태입니다.
+
+* int add(int index, char *item) 
+	- 통합. index 위치에 노드를 추가.
+
+	int add(int index, char *item) {
+		if(index < 0)
+			return 0;
+
+		if(index == 0){
+			add_first(item);
+			return 1;
+		}
+
+		Node *prev = get_node(index - 1);
+		if(prev != NULL){
+			add_after(prev, item);
+			return 1;
+		}
+		return 0;
+	}
+
+
+
+remove 함수입니다. add 함수와 동일하게 index를 받아서 
+처리해보도록 합시다.
+
+* Node *remove(int index)
+	- index번째 노드를 삭제하고 그 노드의 주소를 반환.
+
+	Node *remove(int index) {
+		if(index < 0) {
+			return NULL;
+		}
+
+		if(index == 0) {
+			return remove_first();
+		}
+
+		Node *prev = get_node(indext - 1);
+		if(prev == NULL)
+			return NULL;
+		else
+			return remove_after(prev);
+	}
+
+
+
+이번에는 Node *remove(char *item)을 생각해봅시다. 
+(int index)가 아닌 (char *item)입니다.
+데이타를 주고 찾아서 그 노드를 삭제라는 뜻.
+그래서 최초에 검색 단계가 있어야겠죠.
+
+	// 검색 단계
+	Node *p = head;
+	while (p!=NULL && strcmp(p->data, item)!=0)
+		p=p->next;
+
+종료가 되면 p는 원하는 노드의 주소를 갖습니다.
+
+하지만 p가 가리키는 노드를 삭제하기위해서는 
+반드시 직전 노드의 주소가 필요하죠!
+그래서 사람들이 가장 많이 쓰는 테크닉이 바로
+포인터를 두개쓰는겁니다. 
+
+	Node *p = head;
+	Node *q = NULL;
+	while (p!=NULL && strcmp(p->data, item)!=0) {
+		q = p;
+		p=p->next;
+	}
+
+q는 항상 p의 한 칸 뒤를 따라갑니다.
+중요합니다. p를 한칸 전진하기 직전에 q에 p의 위치를 저장합니다.
+while문을 통과하고 p와 q값이 정해집니다.
+
+	if (p==NULL)
+		return NULL;
+	if (q==NULL)
+		return remove_first();
+	else
+		return remove_after(q);
+
+p가 NULL인 경우?
+	- 찾는 단어가 없었다는거죠. 반환되는 노드주소는 없습니다.
+q가 NULL인 경우?
+	- 초기화값 그대로죠. while문에 못들어간겁니다.
+	 따라서 리스트를 전진하지않고 목표를 찾은것이니.
+	 첫번째 노드를 삭제하면 되겠네요.
+그 외의 경우는 정상적으로 p에서 단어를 찾았으니 
+직전노드 q를 remove_after(q) 하면 성공입니다!
+
+
+
+그다음은 이제 또다른 예로 정렬되어 있는 리스트에 어떻게 add()
+할지 고민해볼수 있습니다.
+
+* void add_to_ordered_list(char *item)
+	- 연결리스트에 데이터들이 오름차순으로 정렬되어 있다는
+	 가정하에서 새로운 데이터를 삽입한다.
+
+	void add_to_ordered_list(char *item) {
+		Node *p = head;
+		Node *q = NULL;
+		while (p != null && strcmp(p->data, item)<=0) {
+			q = p;
+			p=p->next;
+		}
+		if (q==NULL)
+			add_first(item);
+		else
+			add_after(q);
+	}
+
+생각보다 구현은 간단하게 이뤄질 수 있습니다.
+단지 순회하다가 최초로 item이 p->data보다 작아지는 시점. 
+바로 p의 직전노드인 q를 이용해서 add_after(q) 합니다.
